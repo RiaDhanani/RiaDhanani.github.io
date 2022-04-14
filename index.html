@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Embedding Vega-Lite</title>
+    <script src="https://cdn.jsdelivr.net/npm/vega@5.21.0"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vega-lite@5.2.0"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vega-embed@6.20.2"></script>
+  </head>
+  <body>
+    <div id="vis"></div>
+
+    <script type="text/javascript">
+      var yourVlSpec = {
+        $schema: 'https://vega.github.io/schema/vega-lite/v5.json',
+        description: 'A simple bar chart with embedded data.',
+        data: {
+          values: [
+            {"Routes": "Boston/Miami", "Player": "P1", "Scores": 12, "RoundNumber": "Round1"},
+            {"Routes": "Calgary/Phoenix", "Player": "P2", "Scores": 13, "RoundNumber": "Round1"},
+            {"Routes": "Calgary/Salt Lake City", "Player": "P3", "Scores": 7, "RoundNumber": "Round1"},
+            {"Routes": "Chicago/New Orleans", "Player": "P1", "Scores": 7, "RoundNumber": "Round2"},
+            {"Routes": "Chicago/Santa Fe", "Player": "P2", "Scores": 9, "RoundNumber": "Round2"},
+            {"Routes": "Dallas/New York", "Player": "P3", "Scores": 11, "RoundNumber": "Round2"},
+            {"Routes": "Dllas/El Paso", "Player": "P1", "Scores": 4, "RoundNumber": "Round3"},
+            {"Routes": "Montréal/New Orleans", "Player": "P2", "Scores": 13, "RoundNumber": "Round3"},
+            {"Routes": "New York/Atlanta", "Player": "P3", "Scores": 6, "RoundNumber": "Round3"}
+          ]
+        },
+        "vconcat": [
+    {
+      "mark": "bar",
+      "encoding": {
+    "x": {"field": "Scores", "type": "quantitative"},
+    "y": {"field": "Routes", "type": "nominal"},
+    "color": {
+      "field": "Player",
+       "type": "nominal",
+        "legend": {}
+         }
+  }
+    },
+    {
+      "mark": {
+       "type": "line"
+      },
+      "encoding": {
+        // I wanted to add all the scores of P1 example Round1 was 12, ,then Round2 12+7 = 19 and then Round3 19+4 = 23 and display as a blue line in the chart and do the same thing for the P2 and P3  but I didn't understand how to add these values and use them in the line chart
+    "x": {"field": "Scores", "type": "quantitative"},
+    "y": {"field": "RoundNumber", "type": "nominal"},
+    "color": {
+      "field": "Player",
+       "type": "nominal",
+        "legend": {}
+         }
+  }
+    }
+  ]
+      };
+      vegaEmbed('#vis', yourVlSpec);
+    </script>
+  </body>
+</html>
